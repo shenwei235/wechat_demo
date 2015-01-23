@@ -131,7 +131,7 @@ namespace :deploy do
   # after 'deploy:publishing', 'deploy:restart'
   # after "deploy:publishing", "unicorn:restart"
   after :finished, "deploy:cleanup" # keep only the last 5 releases
-  after :finished, "unicorn:restart"
+  after :finished, "unicorn:legacy_restart"
 end
 
 # task :symlink_database_yml, :roles => :db do
