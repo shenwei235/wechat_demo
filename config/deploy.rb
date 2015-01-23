@@ -38,7 +38,7 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-set :unicorn_pid, "/tmp/unicorn.flex-messenger.pid"
+set :unicorn_pid, "/tmp/unicorn.wechat_demo.pid"
 set :unicorn_config_path, "#{current_path}/config/unicorn.rb"
 set :unicorn_rack_env, -> { fetch(:rails_env) }
 
@@ -128,9 +128,10 @@ namespace :deploy do
   before :deploy, "deploy:check_revision"
   # after "deploy:check", "deploy:setup_config"
 
-  after 'deploy:publishing', 'deploy:restart'
+  # after 'deploy:publishing', 'deploy:restart'
+  # after "deploy:publishing", "unicorn:restart"
   after :finished, "deploy:cleanup" # keep only the last 5 releases
-
+  after :finished, "unicorn:restart"
 end
 
 # task :symlink_database_yml, :roles => :db do

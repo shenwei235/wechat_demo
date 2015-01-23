@@ -5,7 +5,7 @@ working_directory root
 preload_app true
 timeout 30
 
-pid "/tmp/unicorn.flex-messenger.pid"
+pid "/tmp/unicorn.wechat_demo.pid"
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
