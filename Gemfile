@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
@@ -34,7 +33,7 @@ gem 'unicorn'
 
 # Deploy with Capistrano
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 3.3.0'
   # gem 'capistrano-unicorn'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rails', require: false
@@ -50,4 +49,3 @@ gem 'qy_wechat', git: 'git@github.com:shenwei235/qy_wechat.git'
 gem 'bootstrap3-rails'
 # WeChat Oauth2
 gem "omniauth-wechat-oauth2"
-
