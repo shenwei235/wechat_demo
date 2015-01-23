@@ -15,6 +15,7 @@
 /log
 /tmp
 .idea/*
+.capistrano/*
 
 # Ignore database config and redis config
 /config/database.yml
