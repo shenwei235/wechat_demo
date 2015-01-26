@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   resources :orders
 
-  match '/auth/wechat', to: 'omniauth_wechat_callbacks#start', as: :omniauth_wechat_callback_start, via: :get
-  match '/auth/wechat/callback', to: 'omniauth_wechat_callbacks#callback', as: :omniauth_wechat_callback_callback, via: [:get, :post]
+  # match '/auth/wechat', to: 'omniauth_wechat_callbacks#start', as: :omniauth_wechat_callback_start, via: :get
+  # match '/auth/wechat/callback', to: 'omniauth_wechat_callbacks#callback', as: :omniauth_wechat_callback_callback, via: [:get, :post]
   match '/auth/failure', to: 'omniauth_wechat_callbacks#failure', as: :omniauth_wechat_callback_failure, via: :get
   match '/auth/wechat/setup', to: 'omniauth_wechat_callbacks#setup', as: :omniauth_wechat_callback_setup, via: :get
 

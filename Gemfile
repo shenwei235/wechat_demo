@@ -48,4 +48,5 @@ gem 'qy_wechat', git: 'git@github.com:shenwei235/qy_wechat.git'
 # responsive design
 gem 'bootstrap3-rails'
 # WeChat Oauth2
-gem "omniauth-wechat-oauth2"
+gem 'omniauth-wechat', git: 'git@github.com:shenwei235/omniauth-wechat.git'
+# gem "omniauth-wechat-oauth2"
