@@ -47,6 +47,6 @@ end
 gem 'qy_wechat', git: 'git@github.com:shenwei235/qy_wechat.git'
 # responsive design
 gem 'bootstrap3-rails'
-# WeChat Oauth2
-gem 'omniauth-wechat', git: 'git@github.com:shenwei235/omniauth-wechat.git'
+# WeChat QY Oauth2
+gem 'omniauth-qy-wechat-oauth2', git: 'git@github.com:shenwei235/omniauth-qy-wechat-oauth2.git'
 # gem "omniauth-wechat-oauth2"
