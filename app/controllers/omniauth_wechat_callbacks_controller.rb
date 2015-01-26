@@ -11,7 +11,7 @@ class OmniauthWechatCallbacksController < ApplicationController
 
   def setup
     Rails.logger.info "zzzzz"
-    Rails.logger.info request.env.to_json
+    Rails.logger.info WECHAT_CONFIG.to_json
     Rails.logger.info "zzzzz"
     # request.env['omniauth.strategy'].options[:client_secret] = get_access_token
   end
