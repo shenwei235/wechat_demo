@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :orders
 
+  match 'qy_wechat_auth_callback', to: 'home#callback', via: :get
+
   root 'home#index'
 
   # match '/auth/wechat', to: 'omniauth_wechat_callbacks#start', as: :omniauth_wechat_callback_start, via: :get
