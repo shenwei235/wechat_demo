@@ -7,3 +7,5 @@ end
 
 WECHAT_CONFIG.each do |k,v| k.freeze; v.freeze end
 WECHAT_CONFIG.freeze
+
+puts 'WECHAT_CONFIG'; puts JSON.pretty_generate WECHAT_CONFIG

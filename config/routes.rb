@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :orders
 
   match '/auth/failure', to: 'omniauth_wechat_callbacks#failure', as: :omniauth_wechat_callback_failure, via: :get
+  match '/auth/wechat/setup', to: 'omniauth_wechat_callbacks#setup', as: :omniauth_wechat_callback_setup, via: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
