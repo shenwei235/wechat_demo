@@ -2,10 +2,10 @@ require 'net/http'
 class OmniauthWechatCallbacksController < ApplicationController
 
   def failure
-    puts "xxxxx"
-    puts request.headers
-    puts request.env["omniauth.auth"]
-    puts "xxxxx"
+    Rails.logger "xxxxx"
+    Rails.logger request.headers
+    Rails.logger request.env["omniauth.auth"]
+    Rails.logger "xxxxx"
     # redirect_to "/qy_apps"
   end
 
