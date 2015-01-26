@@ -13,6 +13,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+gem 'redis-namespace'
+gem 'redis-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -47,6 +50,5 @@ end
 gem 'qy_wechat', git: 'git@github.com:shenwei235/qy_wechat.git'
 # responsive design
 gem 'bootstrap3-rails'
-# WeChat QY Oauth2
-gem 'omniauth-qy-wechat-oauth2', git: 'git@github.com:shenwei235/omniauth-qy-wechat-oauth2.git'
-# gem "omniauth-wechat-oauth2"
+# WeChat QY API
+gem 'qy_wechat_api', git: 'git@github.com:shenwei235/qy_wechat_api.git'
