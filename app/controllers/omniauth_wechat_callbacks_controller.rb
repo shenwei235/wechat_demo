@@ -7,7 +7,9 @@ class OmniauthWechatCallbacksController < ApplicationController
 
   def callback
     Rails.logger.info "zzzzz"
-    Rails.logger.info request.to_json
+    Rails.logger.info request.headers.to_json
+    Rails.logger.info response
+    Rails.logger.info params
     Rails.logger.info "zzzzz"
     render :text => "Auth complete.", :status => 200
   end
