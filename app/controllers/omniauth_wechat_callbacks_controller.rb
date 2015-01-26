@@ -1,21 +1,16 @@
 require 'net/http'
 class OmniauthWechatCallbacksController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token
-
   def failure
     Rails.logger.info "xxxxx"
-    #Rails.logger.info request.headers.to_json
+    Rails.logger.info request.headers.to_json
     #Rails.logger.info request.env.to_json
     Rails.logger.info "xxxxx"
     # redirect_to "/qy_apps"
   end
 
   def setup
-    Rails.logger.info "zzzzz"
-    Rails.logger.info WECHAT_CONFIG.to_json
-    Rails.logger.info "zzzzz"
-    # request.env['omniauth.strategy'].options[:client_secret] = get_access_token
+    request.env['omniauth.strategy'].options[:client_secret] = ''
   end
 
   private
