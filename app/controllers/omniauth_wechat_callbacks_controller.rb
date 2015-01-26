@@ -11,6 +11,7 @@ class OmniauthWechatCallbacksController < ApplicationController
 
   def setup
     request.env['omniauth.strategy'].options[:client_secret] = ''
+    render :text => "Setup complete.", :status => 404
   end
 
   private
