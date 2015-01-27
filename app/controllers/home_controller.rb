@@ -14,6 +14,7 @@ class HomeController < ApplicationController
     if params[:code]
       @user_info = @group_client.oauth.get_user_info(params[:code], '1')
       Rails.logger.info @user_info.to_json
+      render text: @user_info.to_json, status: 200
     end
   end
 
