@@ -18,7 +18,7 @@ class HomeController < ApplicationController
       @user_profile = @group_client.user.get(@user_info.result[:UserId])
       Rails.logger.info @user_info.to_json
       Rails.logger.info @user_profile.to_json
-      render text: [@user_info, @user_pofile].to_json, status: 200
+      render text: [@user_info, @user_profile].to_json, status: 200
     end
   end
 
