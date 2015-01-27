@@ -125,27 +125,18 @@ namespace :deploy do
     end
   end
 
+  task :update_db do
+    on roles(:db) do
+      run "cd #{release_path};export; RAILS_ENV=#{fetch(:rails_env)} bundle exec rake db:migrate"
+    end
+  end
+
   before :deploy, "deploy:check_revision"
   # after "deploy:check", "deploy:setup_config"
 
   # after 'deploy:publishing', 'deploy:restart'
   # after "deploy:publishing", "unicorn:restart"
   after :finished, "deploy:cleanup" # keep only the last 5 releases
+  after :finished, "deploy:update_db"
   after :finished, "unicorn:legacy_restart"
 end
-
-# task :symlink_database_yml, :roles => :db do
-# #  run "rm #{release_path}/config/database.yml"
-#   run "ln -sfn #{shared_path}/config/database.yml
-#        #{release_path}/website/config/database.yml"
-# end
-#
-# task :update_db, :roles => :db do
-# #  run "rm #{release_path}/config/database.yml"
-#   run "cd #{release_path};export; RAILS_ENV=#{rails_env} bundle exec rake db:migrate"
-# end
-#
-# after "deploy:finalize_update", "update_db"
-# after "deploy:assets:symlink", "symlink_database_yml"
-# after "deploy:restart", "unicorn:restart"
-# after "deploy:restart", "deploy:cleanup"
