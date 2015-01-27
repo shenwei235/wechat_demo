@@ -120,8 +120,8 @@ namespace :deploy do
   task :restore_database do
     on roles(:db) do
       execute "mkdir -p #{shared_path}/config"
-      upload! "config/20150123.sql", "#{shared_path}/config/20150123.sql"
-      execute "/usr/bin/mysql -uroot -pshenwei235 wechat_demo_20150123 < #{shared_path}/config/20150123.sql"
+      upload! "config/20150127.sql", "#{shared_path}/config/20150127.sql"
+      execute "/usr/bin/mysql -uroot -pshenwei235 wechat_demo_20150123 < #{shared_path}/config/20150127.sql"
     end
   end
 

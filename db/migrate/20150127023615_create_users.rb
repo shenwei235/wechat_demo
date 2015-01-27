@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :mobile
       t.integer :gender
       t.string :email
-      t.string :wexinid
+      t.string :weixinid
       t.integer :status
 
       t.timestamps

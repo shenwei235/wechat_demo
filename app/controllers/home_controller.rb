@@ -5,43 +5,49 @@ class HomeController < ApplicationController
   end
 
   def index
+    # is_valid? will re-generate new token if expired.
     if @group_client.is_valid?
       redirect_to @group_client.oauth.authorize_url("http://viduapp.com/qy_wechat_auth_callback", Digest::MD5.hexdigest(Time.now.to_s))
     end
   end
 
   def callback
-    if params[:code] && @group_client.is_valid?
-      Rails.logger.info params[:code]
-      @user_info = @group_client.oauth.get_user_info(params[:code], '1')
-      Rails.logger.info @user_info.result[:UserId]
-      @user_profile = @group_client.user.get(@user_info.result[:UserId])
-      Rails.logger.info @user_info.to_json
-      Rails.logger.info @user_profile.to_json
-      create_or_update @user_profile
-      render text: [@user_info, @user_profile].to_json, status: 200
+    if params[:code]
+      # get_user_info need APP ID.
+      user_info = @group_client.oauth.get_user_info(params[:code], '1')
+      user_profile = @group_client.user.get(user_info.result[:UserId])
+      Rails.logger.info user_info.to_json
+      Rails.logger.info user_profile.to_json
+      create_or_update user_profile
+      render text: [user_info, user_profile].to_json, status: 200
+    else
+      render text: 'Auth failed, please try again.', status: 200
     end
   end
 
   private
 
     def create_or_update user
-      user_ex = User.find(userid: user.result[:userid]).first
-      qy_group_id = user.result[:department]
+      user_ex = User.where(userid: user.result[:userid]).first
+      qy_group_id = user.result[:department].to_a.join(',')
       if user_ex
-        if user_ex.update_attributes(permit_attrs(user.result))
-          redirect_to "/qy_apps/new"
-        end
+        user_ex.update_attributes!(update_permit_attrs(user.result).merge({:department => qy_group_id}))
       else
-        user_cu = User.create(permit_attrs(user.result))
-        if user_cu.save
-          redirect_to "/qy_apps/new"
-        end
+        user_cu = User.new(create_permit_attrs(user.result).merge({:department => qy_group_id}))
+        user_cu.save!
       end
     end
 
-    def permit_attrs result
-      result.permit(:userid, :name, :position, :mobile, :gender, :email, :weixinid, :status)
+    def create_permit_attrs result
+      keepers = [:userid, :name, :position, :mobile, :gender, :email, :weixinid, :status, :avatar]
+      validate_res = result.keep_if {|k,_| keepers.include? k }
+      validate_res
+    end
+
+    def update_permit_attrs result
+      keepers = [:name, :position, :mobile, :gender, :email, :status, :avatar]
+      validate_res = result.keep_if {|k,_| keepers.include? k }
+      validate_res
     end
 
 end

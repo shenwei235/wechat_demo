@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127024312) do
+ActiveRecord::Schema.define(version: 20150127061427) do
 
   create_table "groups", force: true do |t|
     t.integer  "qy_group_id"
@@ -48,12 +48,14 @@ ActiveRecord::Schema.define(version: 20150127024312) do
     t.string   "mobile"
     t.integer  "gender"
     t.string   "email"
-    t.string   "wexinid"
+    t.string   "weixinid"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
     t.string   "name"
+    t.string   "avatar"
+    t.string   "department"
   end
 
 end
