@@ -1,18 +1,12 @@
 Rails.application.routes.draw do
-  mount QyWechat::Engine, at: "/"
+
+  root 'home#index'
 
   resources :qy_apps
 
   resources :orders
 
   match 'qy_wechat_auth_callback', to: 'home#callback', via: :get
-
-  root 'home#index'
-
-  # match '/auth/wechat', to: 'omniauth_wechat_callbacks#start', as: :omniauth_wechat_callback_start, via: :get
-  # match '/auth/wechat/callback', to: 'omniauth_wechat_callbacks#callback', as: :omniauth_wechat_callback_callback, via: [:get, :post]
-  match '/auth/failure', to: 'omniauth_wechat_callbacks#failure', as: :omniauth_wechat_callback_failure, via: :get
-  match '/auth/wechat/setup', to: 'omniauth_wechat_callbacks#setup', as: :omniauth_wechat_callback_setup, via: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

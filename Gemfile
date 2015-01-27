@@ -46,9 +46,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# WeChat Enterprise SDK
-gem 'qy_wechat', git: 'git@github.com:shenwei235/qy_wechat.git'
 # responsive design
 gem 'bootstrap3-rails'
-# WeChat QY API
+# WeChat Enterprise SDK
 gem 'qy_wechat_api', git: 'git@github.com:shenwei235/qy_wechat_api.git'
