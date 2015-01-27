@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121071602) do
+ActiveRecord::Schema.define(version: 20150127024312) do
+
+  create_table "groups", force: true do |t|
+    t.integer  "qy_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "orders", force: true do |t|
     t.string "product_name"
@@ -35,10 +42,18 @@ ActiveRecord::Schema.define(version: 20150121071602) do
   add_index "qy_apps", ["qy_token"], name: "index_qy_apps_on_qy_token", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name"
+    t.string   "userid"
+    t.string   "deviceid"
+    t.string   "position"
+    t.string   "mobile"
+    t.integer  "gender"
     t.string   "email"
+    t.string   "wexinid"
+    t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
+    t.string   "name"
   end
 
 end

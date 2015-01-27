@@ -18,8 +18,30 @@ class HomeController < ApplicationController
       @user_profile = @group_client.user.get(@user_info.result[:UserId])
       Rails.logger.info @user_info.to_json
       Rails.logger.info @user_profile.to_json
+      create_or_update @user_profile
       render text: [@user_info, @user_profile].to_json, status: 200
     end
   end
+
+  private
+
+    def create_or_update user
+      user_ex = User.find(userid: user.result[:userid]).first
+      qy_group_id = user.result[:department]
+      if user_ex
+        if user_ex.update_attributes(permit_attrs(user.result))
+          redirect_to "/qy_apps/new"
+        end
+      else
+        user_cu = User.create(permit_attrs(user.result))
+        if user_cu.save
+          redirect_to "/qy_apps/new"
+        end
+      end
+    end
+
+    def permit_attrs result
+      result.permit(:userid, :name, :position, :mobile, :gender, :email, :weixinid, :status)
+    end
 
 end
