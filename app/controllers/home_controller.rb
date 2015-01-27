@@ -14,8 +14,8 @@ class HomeController < ApplicationController
     if params[:code] && @group_client.is_valid?
       Rails.logger.info params[:code]
       @user_info = @group_client.oauth.get_user_info(params[:code], '1')
-      Rails.logger.info @user_info["result"]["UserId"]
-      @user_profile = @group_client.user.get(@user_info["result"]["UserId"])
+      Rails.logger.info @user_info.result[:UserId]
+      @user_profile = @group_client.user.get(@user_info.result[:UserId])
       Rails.logger.info @user_info.to_json
       Rails.logger.info @user_profile.to_json
       render text: [@user_info, @user_pofile].to_json, status: 200
