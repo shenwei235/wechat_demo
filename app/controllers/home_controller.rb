@@ -5,11 +5,8 @@ class HomeController < ApplicationController
   end
 
   def index
-    Rails.logger.info "xxxxxx"
-    Rails.logger.info @group_client.is_valid?
-    Rails.logger.info "xxxxxx"
     if @group_client.is_valid?
-      @auth_url = @group_client.oauth.authorize_url("http://viduapp.com/qy_wechat_auth_callback", Digest::MD5.hexdigest(Time.now.to_s))
+      redirect_to @group_client.oauth.authorize_url("http://viduapp.com/qy_wechat_auth_callback", Digest::MD5.hexdigest(Time.now.to_s))
     end
   end
 
