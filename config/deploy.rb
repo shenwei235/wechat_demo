@@ -127,7 +127,7 @@ namespace :deploy do
 
   task :update_db do
     on roles(:db) do
-      run "cd #{release_path};export; RAILS_ENV=#{fetch(:rails_env)} bundle exec rake db:migrate"
+      execute "cd #{release_path}; RAILS_ENV=#{fetch(:rails_env)} bundle exec rake db:migrate"
     end
   end
 
