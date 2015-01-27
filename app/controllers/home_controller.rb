@@ -31,9 +31,29 @@ class HomeController < ApplicationController
       user_ex = User.where(userid: user.result[:userid]).first
       qy_group_id = user.result[:department].to_a.join(',')
       if user_ex
-        user_ex.update_attributes!(update_permit_attrs(user.result).merge({:department => qy_group_id}))
+        user_ex.update_attributes!({
+           :name => user.result[:name].to_s,
+           :avatar => user.result[:avatar].to_s,
+           :position => user.result[:position].to_s,
+           :department => qy_group_id,
+           :mobile => user.result[:mobile].to_s,
+           :gender => user.result[:gender].to_i,
+           :email => user.result[:email].to_s,
+           :status => user.result[:status].to_i
+        })
       else
-        user_cu = User.new(create_permit_attrs(user.result).merge({:department => qy_group_id}))
+        user_cu = User.new({
+          :userid => user.result[:userid].to_s,
+          :name => user.result[:name].to_s,
+          :avatar => user.result[:avatar].to_s,
+          :position => user.result[:position].to_s,
+          :department => qy_group_id,
+          :mobile => user.result[:mobile].to_s,
+          :gender => user.result[:gender].to_i,
+          :email => user.result[:email].to_s,
+          :weixinid => user.result[:weixinid].to_s,
+          :status => user.result[:status].to_i
+        })
         user_cu.save!
       end
     end
