@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git@github.com:shenwei235/qy_wechat_api.git
-  revision: 1b3062f36b947d43d315f46facb98da71d81784a
+  revision: 50e7368614729db6536ca573e4cbd8f4efc6a4ef
   specs:
     qy_wechat_api (1.0.0.beta1)
       carrierwave (~> 0.10.0)
