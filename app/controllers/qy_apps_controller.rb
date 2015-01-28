@@ -1,4 +1,5 @@
 class QyAppsController < ApplicationController
+  before_filter :is_user_login
   before_action :set_qy_app, only: [:show, :edit, :update, :destroy]
 # GET /qy_apps
 # GET /qy_apps.json
@@ -61,4 +62,9 @@ class QyAppsController < ApplicationController
   def qy_app_params
     params.require(:qy_app).permit(:name, :qy_token, :encoding_aes_key, :corp_id)
   end
+
+  def is_user_login
+    redirect_to root_path if !warden.authenticated?
+  end
+
 end

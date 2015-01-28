@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class SessionsController < ApplicationController
 
   def initialize
     @group_client = QyWechatApi::Client.new(WECHAT_CONFIG['WECHAT_APP_ID'], WECHAT_CONFIG['WECHAT_APP_SECRET'])
@@ -7,7 +7,11 @@ class HomeController < ApplicationController
   def index
     # is_valid? will re-generate new token if expired.
     if @group_client.is_valid?
-      redirect_to @group_client.oauth.authorize_url("http://viduapp.com/qy_wechat_auth_callback", Digest::MD5.hexdigest(Time.now.to_s))
+      if warden.authenticated?
+        redirect_to '/qy_apps/new'
+      else
+        redirect_to @group_client.oauth.authorize_url("http://viduapp.com/qy_wechat_auth_callback", Digest::MD5.hexdigest(Time.now.to_s))
+      end
     end
   end
 
@@ -19,10 +23,8 @@ class HomeController < ApplicationController
       Rails.logger.info user_info.to_json
       Rails.logger.info user_profile.to_json
       create_or_update user_profile
-      render text: [user_info, user_profile].to_json, status: 200
-    else
-      render text: 'Auth failed, please try again.', status: 200
     end
+    redirect_to :index
   end
 
   private
@@ -41,6 +43,7 @@ class HomeController < ApplicationController
            :email => user.result[:email].to_s,
            :status => user.result[:status].to_i
         })
+        warden.set_user(user_ex)
       else
         user_cu = User.new({
           :userid => user.result[:userid].to_s,
@@ -55,19 +58,8 @@ class HomeController < ApplicationController
           :status => user.result[:status].to_i
         })
         user_cu.save!
+        warden.set_user(user_cu)
       end
-    end
-
-    def create_permit_attrs result
-      keepers = [:userid, :name, :position, :mobile, :gender, :email, :weixinid, :status, :avatar]
-      validate_res = result.keep_if {|k,_| keepers.include? k }
-      validate_res
-    end
-
-    def update_permit_attrs result
-      keepers = [:name, :position, :mobile, :gender, :email, :status, :avatar]
-      validate_res = result.keep_if {|k,_| keepers.include? k }
-      validate_res
     end
 
 end

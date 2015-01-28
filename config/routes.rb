@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  root 'sessions#index'
 
   resources :qy_apps
 
   resources :orders
 
-  match 'qy_wechat_auth_callback', to: 'home#callback', via: :get
+  match 'qy_wechat_auth_callback', to: 'sessions#callback', via: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
