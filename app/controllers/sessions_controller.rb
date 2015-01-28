@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       Rails.logger.info user_profile.to_json
       create_or_update user_profile
     end
-    redirect_to :index
+    redirect_to root_path
   end
 
   private
