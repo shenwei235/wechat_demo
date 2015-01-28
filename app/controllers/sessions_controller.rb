@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
       user_ex = User.where(userid: user.result[:userid]).first
       qy_group_id = user.result[:department].to_a.join(',')
       if user_ex
-        user_ex.update_attributes!({
+        user_ex.update_attributes({
            :name => user.result[:name].to_s,
            :avatar => user.result[:avatar].to_s,
            :position => user.result[:position].to_s,
@@ -43,6 +43,7 @@ class SessionsController < ApplicationController
            :email => user.result[:email].to_s,
            :status => user.result[:status].to_i
         })
+        user_ex.save!
         warden.set_user(user_ex)
       else
         user_cu = User.new({
